@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Title -->
+  <title>{% if header.title %}{{ header.title|e('html') }} | {% endif %}{{ site.title|e('html') }}{% if header.title %}{{ header.title|e('html') }} | {% endif %}</title>
+
+  <!-- Required Meta Tags Always Come First -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="../../favicon.ico">
+  <!-- Google Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800">
+  <!-- CSS Global Compulsory -->
+  {%  block stylesheets %}
+
+  {% do assets.addCss('theme://vendor/bootstrap/bootstrap.min.css') %}
+  {% do assets.addCss('theme://vendor/icon-awesome/css/font-awesome.min.css') %}
+  {% do assets.addCss('theme://vendor/icon-line-pro/style.css') %}
+  {% do assets.addCss('theme://vendor/icon-hs/style.css') %}
+  {% do assets.addCss('theme://vendor/animate.css') %}
+  {% do assets.addCss('theme://vendor/hs-megamenu/src/hs.megamenu.css') %}
+  {% do assets.addCss('theme://vendor/hamburgers/hamburgers.min.css') %}
+  <!-- CSS Unify -->
+  {% do assets.addCss('theme://css/unify.css') %}
+  {% do assets.addCss('theme://css/unify-core.css') %}
+  {% do assets.addCss('theme://css/unify-components.css') %}
+  {% do assets.addCss('theme://css/unify-globals.css') %}
+  <!-- CSS Customization -->
+  {% do assets.addCss('theme://css/custom.css') %}
+  {%  endblock %}
+  {{ assets.css() | raw }}
+</head>
+
+<body>
+  {% include 'partials/menu.html.twig' %}
+  {% include 'partials/banner.html.twig' %}
+
+  {% block showcase %}{% endblock %}
+
+  {% block body %}
+  <section id="body" class="{{ class }}">
+      {% block content %}{% endblock %}
+  </section>
+  {% endblock %}
+
+  {% include 'partials/footer.html.twig' %}
+
+  <!-- JS Global Compulsory -->
+  {% do assets.addJs('theme://vendor/jquery/jquery.min.js') %}
+  {% do assets.addJs('theme://vendor/jquery-migrate/jquery-migrate.min.js') %}
+  {% do assets.addJs('theme://vendor/popper.js/popper.min.js') %}
+  {% do assets.addJs('theme://vendor/bootstrap/bootstrap.min.js') %}
+
+  <!-- JS Implementing Plugins -->
+  {% do assets.addJs('theme://vendor/hs-megamenu/src/hs.megamenu.js') %}
+
+  <!-- JS Unify -->
+  {% do assets.addJs('theme://vendor/hs-megamenu/src/hs.megamenu.js') %}
+  {% do assets.addJs('theme://js/hs.core.js') %}
+  {% do assets.addJs('theme://js/components/hs.header.js') %}
+  {% do assets.addJs('theme://js/helpers/hs.hamburgers.js') %}
+  {% do assets.addJs('theme://js/components/hs.tabs.js') %}
+  {% do assets.addJs('theme://js/components/hs.go-to.js') %}
+
+  <!-- JS Customization -->
+  {% do assets.addJs('theme://js/custom.js') %}
+
+  {{ assets.js() | raw }}
+
+  <!-- JS Plugins Init. -->
+  <script>
+    $(document).on('ready', function () {
+        // initialization of tabs
+        $.HSCore.components.HSTabs.init('[role="tablist"]');
+
+        // initialization of go to
+        $.HSCore.components.HSGoTo.init('.js-go-to');
+      });
+
+      $(window).on('load', function () {
+        // initialization of header
+        $.HSCore.components.HSHeader.init($('#js-header'));
+        $.HSCore.helpers.HSHamburgers.init('.hamburger');
+
+        // initialization of HSMegaMenu component
+        $('.js-mega-menu').HSMegaMenu({
+          event: 'hover',
+          pageContainer: $('.container'),
+          breakpoint: 991
+        });
+      });
+
+      $(window).on('resize', function () {
+        setTimeout(function () {
+          $.HSCore.components.HSTabs.init('[role="tablist"]');
+        }, 200);
+      });
+  </script>
+
+
+
+
+
+
+
+</body>
+
+</html>
